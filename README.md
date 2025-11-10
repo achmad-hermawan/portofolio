@@ -1,2 +1,2 @@
 # portofolio
-https://hermawan-portofolio.netlify.app/
+https://portofolio-hermawan.netlify.app/
