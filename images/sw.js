@@ -5,8 +5,8 @@ const urlsToCache = [
   '/index.html',
   '/assets/css/style.css',
   '/assets/js/script.js',
-  '/images/profil.jpg',
-  '/images/icons/profil.jpg',
+  '/images/profil.png',
+  '/images/icons/profil.png',
   // Tambahkan file-file penting lainnya (misalnya, gambar proyek) jika perlu
 ];
 
