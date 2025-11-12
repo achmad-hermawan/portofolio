@@ -1,93 +1,149 @@
-// =============================
-// HELPER ELEMENTS
-// =============================
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("nav a");
-const scrollTopBtn = document.getElementById("scrollTopBtn");
+/**
+ * Menunggu hingga seluruh konten HTML dimuat sebelum menjalankan script
+ * Ini adalah praktik terbaik untuk menghindari error 'element not found'
+ */
+window.addEventListener('DOMContentLoaded', () => {
 
-// =============================
-// GABUNGAN SCROLL LISTENER (Performa Lebih Baik)
-// (Untuk Navbar Active & Scroll-to-Top)
-// =============================
-window.addEventListener("scroll", () => {
-  // 1. Logika untuk Scroll-to-Top
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-    scrollTopBtn.style.display = "block";
-  } else {
-    scrollTopBtn.style.display = "none";
-  }
+  // Panggil semua fungsi inisialisasi
+  setupScrollListeners();
+  setupThemeToggle();
+  setupCanvasAnimations();
+  registerServiceWorker();
 
-  // 2. Logika untuk Navbar Active
-  let current = "";
-  sections.forEach(section => {
-    // Menggunakan offset 120px Anda untuk header
-    const sectionTop = section.offsetTop - 120; 
-    if (scrollY >= sectionTop) {
-      current = section.getAttribute("id");
-    }
-  });
-
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === `#${current}`) {
-      link.classList.add("active");
-    }
-  });
 });
 
 // =============================
-// FUNGSI KLIK SCROLL-TO-TOP
+// MODUL 1: SCROLLING
+// (Navbar Active & Scroll-to-Top)
 // =============================
-scrollTopBtn.onclick = function() {
-  document.body.scrollTop = 0; // Untuk Safari
-  document.documentElement.scrollTop = 0; // Untuk Chrome, Firefox, dll.
+function setupScrollListeners() {
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll("nav a");
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  // Jika elemen tidak ditemukan, hentikan fungsi
+  if (!scrollTopBtn || sections.length === 0 || navLinks.length === 0) {
+    console.warn("Elemen untuk scroll listener tidak ditemukan.");
+    return;
+  }
+
+  // Gabungan event listener untuk performa
+  window.addEventListener("scroll", () => {
+    // 1. Logika untuk Scroll-to-Top
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+
+    // 2. Logika untuk Navbar Active
+    let current = "";
+    const scrollYWithOffset = window.scrollY + 121; // Offset 120px + 1px
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollYWithOffset >= sectionTop && scrollYWithOffset < sectionTop + sectionHeight) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+      const linkHref = link.getAttribute("href");
+      if (linkHref === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  });
+
+  // Fungsi klik untuk tombol Scroll-to-Top
+  scrollTopBtn.onclick = () => {
+    document.body.scrollTop = 0; // Untuk Safari
+    document.documentElement.scrollTop = 0; // Untuk Chrome, Firefox, dll.
+  };
 }
 
+
 // =============================
-// THEME TOGGLE (Versi Diperbaiki dengan Ikon Font Awesome)
+// MODUL 2: THEME TOGGLE
+// (Dengan Ikon Font Awesome)
 // =============================
-const themeToggle = document.createElement("button");
-themeToggle.className = "toggle-theme";
-themeToggle.setAttribute("aria-label", "Toggle dark mode");
-
-const themeIcon = document.createElement("i");
-themeIcon.className = "fas fa-moon"; // Ikon default (mode terang)
-
-themeToggle.appendChild(themeIcon);
-document.querySelector("nav").appendChild(themeToggle);
-
-// Set tema awal saat memuat halaman (opsional, tapi bagus)
-// Untuk saat ini, kita set default ke 'light'
-document.documentElement.setAttribute("data-theme", "light");
-
-themeToggle.addEventListener("click", () => {
-  const currentTheme = document.documentElement.getAttribute("data-theme");
-  
-  if (currentTheme === "dark") {
-    // Jika gelap -> ubah ke terang
-    document.documentElement.setAttribute("data-theme", "light");
-    themeIcon.className = "fas fa-moon";
-  } else {
-    // Jika terang -> ubah ke gelap
-    document.documentElement.setAttribute("data-theme", "dark");
-    themeIcon.className = "fas fa-sun";
+function setupThemeToggle() {
+  const nav = document.querySelector("nav");
+  if (!nav) {
+    console.warn("Elemen <nav> tidak ditemukan untuk theme toggle.");
+    return;
   }
-});
+
+  const themeToggle = document.createElement("button");
+  themeToggle.className = "toggle-theme";
+  themeToggle.setAttribute("aria-label", "Toggle dark mode");
+
+  const themeIcon = document.createElement("i");
+  
+  // Set tema awal ke 'light' (sesuai kode Anda)
+  document.documentElement.setAttribute("data-theme", "light");
+  themeIcon.className = "fas fa-moon";
+
+  themeToggle.appendChild(themeIcon);
+  nav.appendChild(themeToggle);
+
+  // Logika klik
+  themeToggle.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    
+    if (currentTheme === "dark") {
+      document.documentElement.setAttribute("data-theme", "light");
+      themeIcon.className = "fas fa-moon";
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      themeIcon.className = "fas fa-sun";
+    }
+  });
+}
+
 
 // =============================
-// FLOATING NETWORK ANIMATION (Diperbaiki untuk Dark Mode)
+// MODUL 3: CANVAS NETWORK ANIMATION
 // =============================
+function setupCanvasAnimations() {
+  /**
+   * Peringatan Performa: Menjalankan 5 animasi canvas terpisah
+   * bisa sangat membebani CPU, terutama di perangkat mobile.
+   *
+   * Rekomendasi: Pertimbangkan untuk hanya menjalankan ini
+   * di satu section saja, misalnya createNetwork("home");
+   */
+  ["home", "about", "skills", "projects", "contact"].forEach(id => createNetwork(id));
+}
+
+/**
+ * Fungsi createNetwork (Diperbaiki agar membaca warna dari CSS)
+ */
 function createNetwork(canvasId) {
-  const canvas = document.createElement("canvas");
-  canvas.className = "canvas-bg";
-  
   const parentSection = document.querySelector(`#${canvasId}`);
   if (!parentSection) return; // Hentikan jika section tidak ditemukan
+
+  const canvas = document.createElement("canvas");
+  canvas.className = "canvas-bg";
   parentSection.appendChild(canvas);
 
   const ctx = canvas.getContext("2d");
   let particles = [];
   const numParticles = 40;
+
+  // --- Fungsi Helper untuk Konversi Warna ---
+  function hexToRgba(hex, alpha) {
+    // Hapus tanda #
+    hex = hex.replace('#', '');
+    // Konversi hex ke R, G, B
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  // ------------------------------------------
 
   function resize() {
     canvas.width = canvas.offsetWidth;
@@ -110,25 +166,22 @@ function createNetwork(canvasId) {
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // PERBAIKAN: Cek tema saat ini untuk menentukan warna
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    let particleColor, lineColor;
+    // === PERBAIKAN PENTING ===
+    // Baca warna --primary dari CSS, BUKAN hard-code.
+    // Ini memastikan animasi berubah warna saat dark mode aktif.
+    const computedStyles = getComputedStyle(document.documentElement);
+    const particleColorHex = computedStyles.getPropertyValue('--primary').trim();
+    
+    // Buat warna garis dengan opacity dari warna hex
+    const lineColorRgba = hexToRgba(particleColorHex, 0.2);
 
-    if (currentTheme === "dark") {
-      particleColor = "#3b82f6"; // var(--primary) versi dark
-      lineColor = "rgba(59, 130, 246, 0.2)";
-    } else {
-      particleColor = "#2563eb"; // var(--primary) versi light
-      lineColor = "rgba(37, 99, 235, 0.2)";
-    }
-
-    ctx.fillStyle = particleColor;
+    ctx.fillStyle = particleColorHex;
     for (let p of particles) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
       ctx.fill();
     }
-    connectParticles(lineColor);
+    connectParticles(lineColorRgba);
     moveParticles();
     requestAnimationFrame(draw);
   }
@@ -163,7 +216,20 @@ function createNetwork(canvasId) {
   window.addEventListener("resize", resize); // Tambah listener untuk resize
 }
 
-// Peringatan: Menjalankan 5 animasi canvas terpisah bisa jadi berat
-// untuk beberapa perangkat. Jika terasa lambat, pertimbangkan
-// untuk hanya menjalankannya di section 'home'.
-["home", "about", "skills", "projects", "contact"].forEach(id => createNetwork(id));
+
+// =============================
+// MODUL 4: SERVICE WORKER (PWA)
+// =============================
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then((registration) => {
+          console.log('Service Worker berhasil didaftarkan:', registration.scope);
+        })
+        .catch((error) => {
+          console.log('Pendaftaran Service Worker gagal:', error);
+        });
+    });
+  }
+}
