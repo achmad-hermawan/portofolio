@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Proyek Resep Makanan | Achmad Hermawan</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#skills">Skills</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      </nav>
+  </header>
+
+  <main>
+    <section class="project-detail">
+      <div class="section-content">
+
+        <h1 class="project-title">Resep Makanan App (Flutter)</h1>
+
+      <div class="project-gallery">
+        <img src="../images/resep-makanan/home.jpg" alt="Resep Makanan - Halaman Utama" class="gallery-image">
+        <img src="../images/resep-makanan/feature.jpg" alt="Resep Makanan - Halaman Fitur" class="gallery-image">
+      </div>
+
+        <div class="project-grid">
+          <div class="project-description">
+            <h2>Tentang Proyek</h2>
+            <p>
+              Ini adalah deskripsi lengkap tentang proyek aplikasi resep makanan. 
+              Saya membangunnya menggunakan Flutter untuk platform mobile (Android & iOS).
+            </p>
+            <p>
+              Aplikasi ini mengintegrasikan API pihak ketiga (TheCocktailDB) untuk mengambil data resep secara real-time. 
+              Fitur utamanya termasuk pencarian resep, halaman detail, dan sistem favorit 
+              menggunakan Firebase Firestore.
+            </p>
+            
+            <h2>Tantangan & Solusi</h2>
+            <p>
+              Salah satu tantangan adalah mengelola *state* (data) secara efisien. Saya memutuskan untuk 
+              menggunakan provider state management untuk menangani data favorit pengguna 
+              yang tersinkronisasi dengan Firebase.
+            </p>
+          </div>
+
+          <aside class="project-info">
+            <div class="info-box">
+              <h3>Teknologi</h3>
+              <ul>
+                <li>Flutter</li>
+                <li>Dart</li>
+                <li>Firebase Firestore</li>
+                <li>TheCocktailDB API</li>
+              </ul>
+            </div>
+            
+            <div class="info-box">
+              <h3>Link</h3>
+              <a href="https://github.com/achmad-hermawan/resep_makanan" class="btn-primary" target="_blank">Lihat Kode (GitHub)</a>
+              </div>
+          </aside>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 <strong>Achmad Hermawan</strong>. All rights reserved.</p>
+      
+      <a href="#" id="scrollTopBtn" title="Kembali ke atas" class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+      </a>
+    </div>
+  </footer>
+  
+  <script src="../assets/js/script.js" defer></script>
+</body>
+</html>

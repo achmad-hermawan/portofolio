@@ -538,3 +538,133 @@ footer {
   transition: all 0.3s ease;
 }
 #scrollTopBtn:hover { background-color: var(--text); }
+
+/* =========================================
+   PROJECT DETAIL PAGE (Halaman Proyek)
+========================================= */
+
+.project-detail {
+  /* Hapus min-height agar panjangnya sesuai konten */
+  min-height: auto; 
+  padding-top: 120px; /* Jarak dari header */
+  padding-bottom: 60px;
+}
+
+.project-detail .section-content {
+  max-width: 900px; /* Buat lebih ramping agar mudah dibaca */
+}
+
+.project-title {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary);
+}
+
+.hero-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 3rem;
+  box-shadow: 0 8px 30px var(--shadow);
+  border: 4px solid var(--card-bg);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.project-description h2 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+.project-description p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+.project-description p:first-of-type {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.project-info .info-box {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.project-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+
+.project-info ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.project-info li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 20px;
+}
+
+/* Membuat ikon centang kecil */
+.project-info li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.project-info .btn-primary,
+.project-info .btn-secondary {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Responsif untuk halaman detail */
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr; /* Stack di mobile */
+  }
+  
+  .project-info {
+    order: -1; /* Pindahkan info box ke atas di mobile */
+  }
+  
+  .project-title {
+    font-size: 2.2rem;
+  }
+}
+
+/* =========================================
+LAYOUT IMAGE HALAMAN RESEP MAKANAN
+========================================= */
+
+.project-gallery {
+  display: grid; /* Gunakan CSS Grid */
+  grid-template-columns: 1fr 1fr; /* Buat 2 kolom dengan lebar sama */
+  gap: 1.5rem; /* Jarak antar gambar */
+  margin-bottom: 3rem; /* Jarak dari galeri ke teks di bawahnya */
+}
+
+.gallery-image {
+  width: 100%; /* Buat gambar mengisi 100% lebar kolomnya */
+  height: auto; /* Jaga rasio aspek gambar */
+  border-radius: 8px; /* Samakan dengan style Anda */
+  box-shadow: 0 4px 10px var(--shadow);
+  border: 3px solid var(--card-bg);
+}
