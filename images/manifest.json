@@ -1,0 +1,21 @@
+{
+  "name": "Portfolio Achmad Hermawan",
+  "short_name": "Achmad",
+  "description": "Portofolio pribadi Achmad Hermawan, seorang Fullstack Developer dan Data Scientist.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/images/icons/profil.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icons/profil.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
