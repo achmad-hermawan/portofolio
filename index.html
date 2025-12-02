@@ -1,200 +1,315 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="#0f172a">
-  <title>Portfolio | Achmad Hermawan</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="manifest" href="/manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portofolio Achmad Hermawan - Fullstack Developer & Data Scientist">
+    <title>Achmad Hermawan | Creative Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
-
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
+    <!-- 1. Canvas Background: Breathing Grid -->
+    <canvas id="bg-canvas"></canvas>
 
-    <section id="home">
-      <div class="section-content home-section">
-        <div class="intro-text">
-          <h1>Halo, Saya <span>Achmad Hermawan</span></h1>
-          <h2>Fullstack Developer | Data Scientist</h2>
-          <p>
-            Saya seorang pengembang web dan analis data yang berfokus pada pembuatan sistem
-            modern dan efisien. Saya menikmati tantangan dalam membangun produk digital yang berdampak.
-          </p>
-          <a href="#projects" class="btn-primary">Lihat Proyek</a>
-        </div>
-        <div class="intro-visual">
-          <img src="images/profil.png" alt="Profil Achmad" />
-        </div>
-      </div>
-    </section>
+    <!-- 2. Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
 
-    <section id="about">
-      <div class="section-content about-section">
-        <h2 class="section-title">Tentang Saya</h2>
-        <div class="about-grid">
-          <div class="about-text">
-            <p>
-              Saya memiliki pengalaman dalam pengembangan aplikasi web menggunakan PHP, JavaScript,
-              dan framework modern. Selain itu, saya juga aktif di bidang analisis data dengan Python,
-              terutama dalam machine learning dan big data analytics.
-            </p>
-            <p>
-              Saya percaya bahwa teknologi dapat digunakan untuk meningkatkan efisiensi dan kualitas hidup.
-              Dalam setiap proyek, saya selalu mengedepankan desain yang bersih, performa optimal,
-              dan pengalaman pengguna yang menyenangkan.
-            </p>
-          </div>
-          <div class="about-stats">
-            <div class="stat">
-              <h3>3+</h3>
-              <p>Tahun Pengalaman</p>
+    <!-- Navigation -->
+    <header id="header">
+        <nav class="glass-nav">
+            <div class="logo">AH<span class="dot">.</span></div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </div>
-            <div class="stat">
-              <h3>25+</h3>
-              <p>Proyek Selesai</p>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="container hero-container">
+                <div class="hero-text">
+                    <span class="greeting">Halo, Saya</span>
+                    <h1 class="glitch-text">Achmad Hermawan</h1>
+                    <h2 class="typewriter-container">
+                        I build <span class="typewriter-text"></span><span class="cursor-blink">|</span>
+                    </h2>
+                    <p class="hero-desc">
+                        Menggabungkan ketelitian kode dengan analisis data mendalam. 
+                        Menciptakan sistem yang efisien, terstruktur, dan berdampak.
+                    </p>
+                    <div class="hero-btns">
+                        <a href="#projects" class="btn btn-primary">Lihat Karya <i class="fas fa-arrow-right"></i></a>
+                        <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+                    </div>
+                    
+                    <div class="social-hero">
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="img-container tilt-element">
+                        <div class="img-backdrop"></div>
+                        <img src="images/profil.png" alt="Achmad Hermawan" class="profile-img">
+                        
+                        <div class="floating-badge badge-1">
+                            <i class="fas fa-code"></i> Developer
+                        </div>
+                        <div class="floating-badge badge-2">
+                            <i class="fas fa-database"></i> Analyst
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="stat">
-              <h3>10+</h3>
-              <p>Klien Puas</p>
+            
+            <a href="#about" class="scroll-down">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Scroll</span>
+            </a>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">01. Introduction</span>
+                    <h2 class="title">Tentang Saya</h2>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-text glass-card reveal-up">
+                        <p>
+                            Saya adalah seorang profesional yang berdedikasi di persimpangan antara <strong>Web Development</strong> dan <strong>Data Science</strong>. 
+                            Saya percaya bahwa keindahan sejati dalam teknologi terletak pada fungsionalitas yang sempurna dan kode yang bersih.
+                        </p>
+                        
+                        <div class="stats-container">
+                            <div class="stat-item">
+                                <h3 class="stat-number stat-num" data-target="3">0+</h3>
+                                <p>Tahun Pengalaman</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 class="stat-number stat-num" data-target="25">0+</h3>
+                                <p>Proyek Selesai</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3 class="stat-number stat-num" data-target="10">0+</h3>
+                                <p>Klien Puas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">02. Expertise</span>
+                    <h2 class="title">Technical Skills</h2>
+                </div>
+
+                <div class="skills-wrapper">
+                    <!-- Skill Category 1 -->
+                    <div class="skill-category reveal-left">
+                        <h3>Frontend Development</h3>
+                        <div class="skill-bar-container">
+                            <div class="skill-info">
+                                <span>HTML/CSS/JS</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress" style="width: 0%" data-width="95%"></div></div>
+                        </div>
+                        <div class="skill-bar-container">
+                            <div class="skill-info">
+                                <span>React & Next.js</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress" style="width: 0%" data-width="85%"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Category 2 -->
+                    <div class="skill-category reveal-right">
+                        <h3>Backend & Data</h3>
+                        <div class="skill-bar-container">
+                            <div class="skill-info">
+                                <span>PHP & CI4</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress" style="width: 0%" data-width="90%"></div></div>
+                        </div>
+                        <div class="skill-bar-container">
+                            <div class="skill-info">
+                                <span>Python & ML</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress" style="width: 0%" data-width="80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">03. Portfolio</span>
+                    <h2 class="title">Karya Terbaru</h2>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card tilt-card" data-tilt>
+                        <div class="card-content">
+                            <div class="card-badge">Mobile App</div>
+                            <h3>Resep Makanan App</h3>
+                            <p>Aplikasi Flutter dengan integrasi Firebase dan API TheCocktailDB.</p>
+                            <div class="tech-stack">
+                                <span>Flutter</span>
+                                <span>Firebase</span>
+                            </div>
+                            <button class="btn-link project-trigger" data-id="1">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card tilt-card" data-tilt>
+                        <div class="card-content">
+                            <div class="card-badge">PWA</div>
+                            <h3>NoteLite PWA</h3>
+                            <p>Aplikasi catatan kuliah offline berbasis PWA dengan caching cerdas.</p>
+                            <div class="tech-stack">
+                                <span>JS</span>
+                                <span>Service Worker</span>
+                            </div>
+                            <button class="btn-link project-trigger" data-id="2">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card tilt-card" data-tilt>
+                        <div class="card-content">
+                            <div class="card-badge">IoT Dashboard</div>
+                            <h3>Smart Farming</h3>
+                            <p>Dashboard monitoring AWS dengan visualisasi data real-time.</p>
+                            <div class="tech-stack">
+                                <span>React</span>
+                                <span>WebSocket</span>
+                            </div>
+                            <button class="btn-link project-trigger" data-id="3">Lihat Detail <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="contact-wrapper glass-card">
+                    <div class="contact-info">
+                        <h3>Let's Connect</h3>
+                        <p>Tertarik untuk berkolaborasi atau berdiskusi tentang teknologi?</p>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>achmadhermawan5657@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Yogyakarta, Indonesia</span>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" id="contactForm">
+                        <div class="input-group">
+                            <input type="text" id="name" required>
+                            <label for="name">Nama Lengkap</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea id="message" required></textarea>
+                            <label for="message">Pesan</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <span class="btn-text">Kirim Pesan</span>
+                            <span class="loader"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (Clean Grid Layout) -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-left">
+                <p>&copy; 2025 <strong>Achmad Hermawan</strong>. Engineering Precision.</p>
+            </div>
+            <div class="footer-right">
+                <p class="footer-note">Designed with discipline.</p>
+            </div>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <section id="skills">
-      <div class="section-content skills-section">
-        <h2 class="section-title">Keahlian</h2>
-        <div class="skills-grid">
-          <div class="skill-card">
-            <h3>Frontend Development</h3>
-            <p>HTML, CSS, JavaScript, React, Tailwind</p>
-          </div>
-          <div class="skill-card">
-            <h3>Backend Development</h3>
-            <p>PHP, CodeIgniter 4, Node.js</p>
-          </div>
-          <div class="skill-card">
-            <h3>Data Analytics</h3>
-            <p>Python, Pandas, Scikit-learn, Matplotlib</p>
-          </div>
-          <div class="skill-card">
-            <h3>Tools & Cloud</h3>
-            <p>Git, Firebase, AWS, Docker</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="section-content projects-section">
-        <h2 class="section-title">Proyek Saya</h2>
-        <div class="projects-grid">
-          <div class="project-card">
-            <h3>Resep Makanan App</h3>
-            <p>
-              Aplikasi Flutter dengan integrasi Firebase dan API TheCocktailDB.
-              Fitur login, favorit, dan tampilan responsif.
-            </p>
-            <a href="projects/resep_makanan.html" class="btn-secondary">Lihat Detail</a>
-          </div>
-
-          <div class="project-card">
-            <h3>IndoMount App</h3>
-            <p>
-              Aplikasi kotlin untuk mencari detail gunung di Indonesia dengan data dari API Indomount.
-            </p>
-            <a href="projects/indomount.html" class="btn-secondary">Lihat Detail</a>
-          </div>
-
-          <div class="project-card">
-            <h3>NoteLite PWA</h3>
-            <p>
-              Aplikasi catatan kuliah offline berbasis PWA dengan caching dan localStorage.
-            </p>
-            <a href="#" class="btn-secondary">Lihat Detail</a>
-          </div>
-      
-          <div class="project-card">
-            <h3>Smart Farming Dashboard UI</h3>
-            <p>
-              Dashboard monitoring AWS (Automatic Weather Station) dengan visualisasi data real-time.
-            </p>
-            <a href="#" class="btn-secondary">Lihat Detail</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="section-content contact-section">
-        <h2 class="section-title">Kontak</h2>
-        <p class="contact-intro">
-          Terima kasih sudah mengunjungi portofolio saya.  
-          Kamu bisa terhubung dengan saya melalui media berikut:
-        </p>
-      
-        <div class="contact-info">
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <a href="mailto:achmad.hermawan@email.com">achmadhermawan5657@gmail.com</a>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <span>+62 895-4107-85597</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Yogyakarta, Indonesia</span>
-          </div>
-        </div>
-      
-        <div class="social-links">
-          <a href="https://github.com/achmad-hermawan" target="_blank" title="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/achmadhermawan/" target="_blank" title="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="https://instagram.com/aachmadh" target="_blank" title="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://twitter.com/username-anda" target="_blank" title="Twitter">
-            <i class="fab fa-x-twitter"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-content">
-      <p>© 2025 <strong>Achmad Hermawan</strong>. All rights reserved.</p>
-  
-      <a href="#home" id="scrollTopBtn" title="Kembali ke atas" class="scroll-top">
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
-      </a>
+    </button>
+
+    <!-- MODAL POPUP -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-content glass-card">
+            <button class="close-modal">&times;</button>
+            <div class="modal-body">
+                <h2 id="modalTitle">Project Title</h2>
+                <span id="modalCategory" class="modal-badge">Category</span>
+                <p id="modalDesc">Description goes here...</p>
+                <div class="modal-tech" id="modalTech"></div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" id="modalLink">View on GitHub</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </footer>
-  
-  <script src="assets/js/script.js" defer></script>
+
+    <!-- GSAP Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
